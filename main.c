@@ -8,7 +8,7 @@ int *init(int sz);
 void printList();
 void printMenu();
 void push();
-int pop();
+void pop();
 
 void main()
 {
@@ -34,7 +34,7 @@ void main()
             if (n)
                 printf("Input error\n");
         }
-
+        printf("=============\n");
     } while (n);
     if (list)
         free(list);
@@ -74,12 +74,24 @@ void push(int n)
         free(list);
     }
     aux[size] = n;
-    printf("%d\n", aux[size]);
     size = newSize;
     list = aux;
 }
 
-int pop()
+void pop()
 {
-    return 0;
+    if (!size)
+    {
+        printf("List is already empty\n");
+    }
+    else
+    {
+        int newSize = size - 1;
+        int *aux = init(newSize);
+        for (int i = 0; i < newSize; i++)
+            aux[i] = list[i + 1];
+        free(list);
+        size = newSize;
+        list = aux;
+    }
 }
